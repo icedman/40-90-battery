@@ -4,6 +4,7 @@ import os
 import re
 
 # settings
+miio = 'miio'
 miio_device_id = '88038183'
 ceiling = 94
 floor = 40
@@ -25,14 +26,14 @@ print 'Discharging: ' + str(discharging)
 
 cmd = ''
 if level>ceiling and not discharging:
-    cmd = 'miio control ' + miio_device_id + ' power false'
+    cmd = miio + ' control ' + miio_device_id + ' power false'
     print 'disconnect...'
 
 if level<floor and discharging:
-    cmd = 'miio control ' + miio_device_id + ' power true'
+    cmd = miio + ' control ' + miio_device_id + ' power true'
     print 'connect...'
 
 if cmd != '':
-    os.popen(cmd)
+    print os.popen(cmd).read()
 else:
     print 'do nothing.'
